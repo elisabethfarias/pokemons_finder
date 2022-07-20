@@ -33,8 +33,17 @@ class PokemonAdapter(
             binding.tvName.text = item.name
 
             item.let {
-                Glide.with(itemView.context).load(it.url).into(binding.ivPokemon)
+                Glide.with(itemView.context).load(formatedUrl(it.url)).into(binding.ivPokemon)
             }
         }
+
+        fun formatedUrl(url: String) : String {
+            val numberFormated = url.replace("https://pokeapi.co/api/v2/pokemon/", "")
+                .replace("/", "").padStart(3, '0')
+            val urlFormated = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${numberFormated}.png"
+            return urlFormated
+        }
     }
+
+
 }
